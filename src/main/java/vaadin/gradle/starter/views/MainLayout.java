@@ -67,7 +67,7 @@ public class MainLayout extends AppLayout {
 	}
 
 	private void addDrawerContent() {
-		Span appName = new Span("Vaadin-Gradle-Starter");
+		Span appName = new Span("Vaadin-Gradle-SpringSecurity-Starter");
 		appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
 		Header header = new Header(appName);
 

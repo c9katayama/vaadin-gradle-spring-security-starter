@@ -9,6 +9,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.internal.RouteUtil;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+
 import vaadin.gradle.starter.security.AuthenticatedUser;
 
 @AnonymousAllowed
@@ -16,31 +17,31 @@ import vaadin.gradle.starter.security.AuthenticatedUser;
 @Route(value = "login")
 public class LoginView extends LoginOverlay implements BeforeEnterObserver {
 
-    private final AuthenticatedUser authenticatedUser;
+	private final AuthenticatedUser authenticatedUser;
 
-    public LoginView(AuthenticatedUser authenticatedUser) {
-        this.authenticatedUser = authenticatedUser;
-        setAction(RouteUtil.getRoutePath(VaadinService.getCurrent().getContext(), getClass()));
+	public LoginView(AuthenticatedUser authenticatedUser) {
+		this.authenticatedUser = authenticatedUser;
+		setAction(RouteUtil.getRoutePath(VaadinService.getCurrent().getContext(), getClass()));
 
-        LoginI18n i18n = LoginI18n.createDefault();
-        i18n.setHeader(new LoginI18n.Header());
-        i18n.getHeader().setTitle("Vaadin-Gradle-Starter");
-        i18n.getHeader().setDescription("Login using user/user or admin/admin");
-        i18n.setAdditionalInformation(null);
-        setI18n(i18n);
+		LoginI18n i18n = LoginI18n.createDefault();
+		i18n.setHeader(new LoginI18n.Header());
+		i18n.getHeader().setTitle("Vaadin-Gradle-SpringSecurity-Starter");
+		i18n.getHeader().setDescription("Login using user/user or admin/admin");
+		i18n.setAdditionalInformation(null);
+		setI18n(i18n);
 
-        setForgotPasswordButtonVisible(false);
-        setOpened(true);
-    }
+		setForgotPasswordButtonVisible(false);
+		setOpened(true);
+	}
 
-    @Override
-    public void beforeEnter(BeforeEnterEvent event) {
-        if (authenticatedUser.get().isPresent()) {
-            // Already logged in
-            setOpened(false);
-            event.forwardTo("");
-        }
+	@Override
+	public void beforeEnter(BeforeEnterEvent event) {
+		if (authenticatedUser.get().isPresent()) {
+			// Already logged in
+			setOpened(false);
+			event.forwardTo("");
+		}
 
-        setError(event.getLocation().getQueryParameters().getParameters().containsKey("error"));
-    }
+		setError(event.getLocation().getQueryParameters().getParameters().containsKey("error"));
+	}
 }
