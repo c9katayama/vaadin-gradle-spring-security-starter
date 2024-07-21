@@ -13,8 +13,7 @@ You can login the app with admin/admin or user/user.
 This application provides different menus according to the privileges of the logged-in user.The role settings are set into the src/main/resources/data.sql.
 If you want to add a new user, you can user GenerateSQLForNewUser.java to generate SQLs for the new user, then add the SQLs to data.sql file.
 
-You can also import the project to your IDE of choice as you would with any
-Maven project. Read more on [how to import Vaadin projects to different IDEs](https://vaadin.com/docs/latest/guide/step-by-step/importing) (Eclipse, IntelliJ IDEA, NetBeans, and VS Code).
+You can also import the project to your IDE of choice as you would with any Gradle project. 
 
 ## Deploying to Production
 
