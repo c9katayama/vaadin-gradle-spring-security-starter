@@ -28,6 +28,7 @@ import com.vaadin.flow.theme.lumo.LumoUtility;
 import vaadin.gradle.starter.data.User;
 import vaadin.gradle.starter.security.AuthenticatedUser;
 import vaadin.gradle.starter.views.addressform.AddressFormView;
+import vaadin.gradle.starter.views.chart.ChartView;
 import vaadin.gradle.starter.views.checkoutform.CheckoutFormView;
 import vaadin.gradle.starter.views.creditcardform.CreditCardFormView;
 import vaadin.gradle.starter.views.feed.FeedView;
@@ -110,6 +111,12 @@ public class MainLayout extends AppLayout {
 			nav.addItem(new SideNavItem("Checkout Form", CheckoutFormView.class, LineAwesomeIcon.CREDIT_CARD.create()));
 
 		}
+
+		if (accessChecker.hasAccess(ChartView.class)) {
+			nav.addItem(new SideNavItem("Chart", ChartView.class, LineAwesomeIcon.CHART_BAR.create()));
+
+		}
+
 		if (accessChecker.hasAccess(MasterDetailView.class)) {
 			nav.addItem(
 					new SideNavItem("Master-Detail", MasterDetailView.class, LineAwesomeIcon.COLUMNS_SOLID.create()));
