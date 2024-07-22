@@ -22,14 +22,16 @@ public class HelloWorldView extends HorizontalLayout {
 	public HelloWorldView() {
 		name = new TextField("Your name");
 		sayHello = new Button("Say hello");
+		// クリック時イベント
 		sayHello.addClickListener(e -> {
 			Notification.show("Hello " + name.getValue());
 		});
+		// Enterキー押下でクリック
 		sayHello.addClickShortcut(Key.ENTER);
-
 		setMargin(true);
+		// コンポーネントをした寄せする
 		setVerticalComponentAlignment(Alignment.END, name, sayHello);
-
+		// コンポーネントを画面に追加
 		add(name, sayHello);
 	}
 
