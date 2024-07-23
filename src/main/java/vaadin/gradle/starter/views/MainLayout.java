@@ -32,6 +32,7 @@ import vaadin.gradle.starter.views.chart.ChartView;
 import vaadin.gradle.starter.views.checkoutform.CheckoutFormView;
 import vaadin.gradle.starter.views.creditcardform.CreditCardFormView;
 import vaadin.gradle.starter.views.feed.FeedView;
+import vaadin.gradle.starter.views.file.FileView;
 import vaadin.gradle.starter.views.gridwithfilters.GridwithFiltersView;
 import vaadin.gradle.starter.views.helloworld.HelloWorldView;
 import vaadin.gradle.starter.views.imagegallery.ImageGalleryView;
@@ -116,7 +117,10 @@ public class MainLayout extends AppLayout {
 			nav.addItem(new SideNavItem("Chart", ChartView.class, LineAwesomeIcon.CHART_BAR.create()));
 
 		}
+		if (accessChecker.hasAccess(FileView.class)) {
+			nav.addItem(new SideNavItem("File", FileView.class, LineAwesomeIcon.FILE.create()));
 
+		}
 		if (accessChecker.hasAccess(MasterDetailView.class)) {
 			nav.addItem(
 					new SideNavItem("Master-Detail", MasterDetailView.class, LineAwesomeIcon.COLUMNS_SOLID.create()));
