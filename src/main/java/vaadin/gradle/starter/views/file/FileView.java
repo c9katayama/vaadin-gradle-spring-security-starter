@@ -44,27 +44,28 @@ public class FileView extends VerticalLayout {
 		upload.addSucceededListener(event -> {
 			String fileName = event.getFileName();
 			InputStream inputStream = buffer.getInputStream(fileName);
-			try {
-				File file = new File(dir, fileName);
-				Files.write(file.toPath(), IOUtils.toByteArray(inputStream));
-				System.out.println("save: " + file.getAbsolutePath());
-				initFileList();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
+			saveFile(fileName, inputStream);
 		});
 		// ファイル一覧
 		grid = new Grid<>(File.class, false);
-		grid.setMaxWidth("500px");
+		grid.setWidth("80%");
 		grid.addColumn("name").setAutoWidth(true);
+		// PNGファイルの表示
 		grid.addComponentColumn((imageFile) -> {
-			// PNGファイルの表示
 			StreamResource streamResource = new StreamResource(imageFile.getName(), () -> createInputStream(imageFile));
 			Anchor link = new Anchor(streamResource, "show");
 			link.setTarget("_blank");
 			return link;
-		});
+		}).setAutoWidth(true).setFlexGrow(0);
+		// PNGファイルのダウンロード
+		grid.addComponentColumn((imageFile) -> {
+			StreamResource streamResource = new StreamResource(imageFile.getName(), () -> createInputStream(imageFile));
+			Anchor link = new Anchor(streamResource, "download");
+			link.getElement().setAttribute("download", true);
+			return link;
+		}).setAutoWidth(true).setFlexGrow(0);
 		initFileList();
+
 		add(label, upload, grid);
 	}
 
@@ -72,6 +73,17 @@ public class FileView extends VerticalLayout {
 		File[] listFiles = dir.listFiles((f) -> f.getName().endsWith(".png"));
 		if (listFiles != null) {
 			grid.setItems(Arrays.asList(listFiles));
+		}
+	}
+
+	private void saveFile(String fileName, InputStream inputStream) {
+		try {
+			File file = new File(dir, fileName);
+			Files.write(file.toPath(), IOUtils.toByteArray(inputStream));
+			System.out.println("save: " + file.getAbsolutePath());
+			initFileList();
+		} catch (IOException e) {
+			throw new RuntimeException(e);
 		}
 	}
 
