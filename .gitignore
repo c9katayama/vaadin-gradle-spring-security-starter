@@ -22,3 +22,4 @@ webpack.generated.js
 /.gradle/
 /bin/
 /build/
+/upload/
